@@ -1,5 +1,5 @@
-# quiz_game
-A simple multiple choice quiz game
+# Quiz game 
+A multiple choice quiz game
 
 Based on Code Challenge 4 of Jonas Schmedtmann's Complete JavaScript course, which runs in the console. 
 
