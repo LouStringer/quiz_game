@@ -16,11 +16,16 @@ const Question = function(category, level, question, answers, correct) {
   this.level = level,
   this.question = question,
   this.answers = answers,
-  this.correct = correct
+  this.correct = correct,
+  this.display = function() {
+    console.log(this.question + this.answers);
+  }
 }
 
+// empty array to store questions
 let questionList = [];
 
+// create questions
 const capitalsTajikistan = new Question("capitals", "hard", "What is the capital of Tajikistan?", [[0, "Dushanabe"], [1, "Tashkent"], [2, "Ashgabat"]], 0);
 questionList.push(capitalsTajikistan);
 
@@ -29,3 +34,14 @@ questionList.push(capitalsLiberia);
 
 const capitalsHungary = new Question("capitals", "easy", "What is the capital of Hungary?", [[0, "Vienna"], [1, "Bratislava"], [2, "Budapest"]], 2);
 questionList.push(capitalsHungary);
+
+// randomly select question and console.log it
+let currentQuestion = Math.floor(Math.random()*questionList.length)
+questionList[currentQuestion].display()
+
+// promt user for answer
+let givenAnswer = prompt("Which answer do you think is correct?")
+while (givenAnswer != questionList[currentQuestion].correct) {
+  givenAnswer = prompt("Sorry, try again");
+}
+alert("Correct!");
