@@ -8,7 +8,28 @@
   <title>Quiz game</title>
 </head>
 <body>
-  <h1>Capital!</h1>
+  <header>
+    <h1>Capital!</h1>
+    <h2>prove your knowledge of world capitals</h2>
+    <div class="buttons">
+      <button class="level">easy</button>
+      <button class="level">hard</button>
+      <button class="category">by country</button>
+      <button class="category">by capital</button>
+      <button class="category">random facts</button>
+      <button class="category">lucky dip</button>
+    </div>
+  </header>
+  <main>
+    <!-- score (left/top)
+    lives (left/top) -->
+    <p class="question">What is the capital of Hungary?</p>
+    <p class="options">Vienna</p>
+    <p class="options">Bratislava</p>
+    <p class="options">Budapest</p>
+    <p class="givenAnswer">Your answer: <input type="text" placeholder="goes here"></p>
+    <p class="outcome">Correct!/Try again!</p>
+  </main>
   <script src="script.js"></script>
 </body>
 </html>
