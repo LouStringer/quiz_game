@@ -10,38 +10,49 @@
 // 6. check if answer is correct and console.log if correct or not (method)
 // 7. make this a module
 
-// function constructor to generate questions
-const Question = function(category, level, question, answers, correct) {
-  this.category = category,
-  this.level = level,
-  this.question = question,
-  this.answers = answers,
-  this.correct = correct,
-  this.display = function() {
-    console.log(this.question + this.answers);
+const quizGame = (function () {
+  // empty variables (private)
+  let questionList = [];
+  let currentQuestion = 0;
+  let givenAnswer = "";
+
+  // function constructor to generate questions (private)
+  const Question = function(category, level, question, answers, correct) {
+    this.category = category,
+    this.level = level,
+    this.question = question,
+    this.answers = answers,
+    this.correct = correct,
+    this.display = function() {
+      console.log(this.question + this.answers);
+    },
+    this.isCorrect = function() {
+      while (givenAnswer != questionList[currentQuestion].correct) {
+      givenAnswer = prompt("Sorry, try again");
+      }
+      alert("Correct!");
+    }
   }
-}
 
-// empty array to store questions
-let questionList = [];
+  // create questions (private) - want to change this to use a functions to access a database instead of writing out by hand
+  const capitalsTajikistan = new Question("capitals", "hard", "What is the capital of Tajikistan?", [[0, "Dushanabe"], [1, "Tashkent"], [2, "Ashgabat"]], 0);
+  questionList.push(capitalsTajikistan);
 
-// create questions
-const capitalsTajikistan = new Question("capitals", "hard", "What is the capital of Tajikistan?", [[0, "Dushanabe"], [1, "Tashkent"], [2, "Ashgabat"]], 0);
-questionList.push(capitalsTajikistan);
+  const capitalsLiberia = new Question("capitals", "hard", "What is the capital of Liberia?", [[0, "Maseru"], [1, "Banjul"], [2, "Monrovia"]], 2);
+  questionList.push(capitalsLiberia);
 
-const capitalsLiberia = new Question("capitals", "hard", "What is the capital of Liberia?", [[0, "Maseru"], [1, "Banjul"], [2, "Monrovia"]], 2);
-questionList.push(capitalsLiberia);
+  const capitalsHungary = new Question("capitals", "easy", "What is the capital of Hungary?", [[0, "Vienna"], [1, "Bratislava"], [2, "Budapest"]], 2);
+  questionList.push(capitalsHungary);
 
-const capitalsHungary = new Question("capitals", "easy", "What is the capital of Hungary?", [[0, "Vienna"], [1, "Bratislava"], [2, "Budapest"]], 2);
-questionList.push(capitalsHungary);
+  return {
+    // play one question (accessible outside module)
+    playGame: function() {
+      currentQuestion = Math.floor(Math.random()*questionList.length);
+      questionList[currentQuestion].display();
+      givenAnswer = prompt("Which answer do you think is correct?");
+      questionList[currentQuestion].isCorrect();
+    }
+  };
+})();
 
-// randomly select question and console.log it
-let currentQuestion = Math.floor(Math.random()*questionList.length)
-questionList[currentQuestion].display()
-
-// promt user for answer
-let givenAnswer = prompt("Which answer do you think is correct?")
-while (givenAnswer != questionList[currentQuestion].correct) {
-  givenAnswer = prompt("Sorry, try again");
-}
-alert("Correct!");
+quizGame.playGame();
