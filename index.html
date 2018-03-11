@@ -10,14 +10,15 @@
 <body>
   <header>
     <h1>Capital!</h1>
-    <h2>prove your knowledge of world capitals</h2>
+    <h2>test your knowledge of world capitals</h2>
     <div class="buttons">
       <button class="level">easy</button>
       <button class="level">hard</button>
+      <br />
       <button class="category">by country</button>
       <button class="category">by capital</button>
       <button class="category">random facts</button>
-      <button class="category">lucky dip</button>
+      <button class="category">mixed bag</button>
     </div>
   </header>
   <main>
@@ -25,15 +26,20 @@
     lives (left/top) -->
     <div id="question-area">
       <p class="question">What is the capital of Hungary?</p>
-      <div class="options">
-        <input name="givenAnswer" type="radio" id="0" name=0>
-        <label for="0">Vienna</label>
-        <input name="givenAnswer" type="radio" id="1" name=1>
-        <label for="1">Bratislava</label>
-        <input name="givenAnswer" type="radio" id="2" name=2>
-        <label for="2">Budapest</label>
-      </div>
-      <p class="outcome">Correct!/Try again!</p>
+      <form>
+        <div class="options">
+          <input name="givenAnswer" type="radio" id="0" name=0>
+          <label for="0">Vienna</label>
+          <br />
+          <input name="givenAnswer" type="radio" id="1" name=1>
+          <label for="1">Bratislava</label>
+          <br />
+          <input name="givenAnswer" type="radio" id="2" name=2>
+          <label for="2">Budapest</label>
+        </div>
+        <button type="submit">Submit</button>
+        <p class="outcome hide">Correct!</p>
+      </form>
     </div>
   </main>
   <script src="script.js"></script>
