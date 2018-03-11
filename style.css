@@ -42,7 +42,7 @@ h2 {
   font-size: 2em;
 }
 
-main {
+#question-area {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,4 +55,8 @@ main {
 .question {
   font-size: 1.5em;
   padding: 5px;
+}
+
+.options>p {
+  display: inline-block;
 }

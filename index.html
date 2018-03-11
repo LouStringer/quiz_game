@@ -23,12 +23,18 @@
   <main>
     <!-- score (left/top)
     lives (left/top) -->
-    <p class="question">What is the capital of Hungary?</p>
-    <p class="options">Vienna</p>
-    <p class="options">Bratislava</p>
-    <p class="options">Budapest</p>
-    <p class="givenAnswer">Your answer: <input type="text" placeholder="goes here"></p>
-    <p class="outcome">Correct!/Try again!</p>
+    <div id="question-area">
+      <p class="question">What is the capital of Hungary?</p>
+      <div class="options">
+        <input name="givenAnswer" type="radio" id="0" name=0>
+        <label for="0">Vienna</label>
+        <input name="givenAnswer" type="radio" id="1" name=1>
+        <label for="1">Bratislava</label>
+        <input name="givenAnswer" type="radio" id="2" name=2>
+        <label for="2">Budapest</label>
+      </div>
+      <p class="outcome">Correct!/Try again!</p>
+    </div>
   </main>
   <script src="script.js"></script>
 </body>
