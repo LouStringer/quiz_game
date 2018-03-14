@@ -16,7 +16,11 @@
   let questionList = [];
   let currentQuestion = 0;
   let givenAnswer = "";
-  let correct = ""
+  let correct = "";
+  let guesses = 1;
+  let score = 0;
+  let lives = 3;
+  const outcome = document.querySelector(".outcome");
 
   // function constructor to generate questions (private)
   const Question = function(category, level, question, answers, correct) {
@@ -28,9 +32,9 @@
     this.display = function() {
       console.log(this.question + this.answers);
     }
-    this.isCorrect = function() {
-      givenAnswer === this.correct ? correct = true : correct = false;
-    }
+    // this.isCorrect = function() {
+    //   givenAnswer === this.correct ? correct = true : correct = false;
+    // }
   }
 
   // create questions (private) - want to change this to use a functions to access a database instead of writing out by hand
@@ -43,24 +47,49 @@
   const capitalsHungary = new Question("capitals", "easy", "What is the capital of Hungary?", [[0, "Vienna"], [1, "Bratislava"], [2, "Budapest"]], 2);
   questionList.push(capitalsHungary);
 
-  // event listener for option buttons
-  const options = [].slice.call(document.querySelectorAll("button.option"));
-  for (i = 0; i < options.length; i++) {
-    options[i].addEventListener("click", function() {
-      givenAnswer = parseInt(this.id);
-      this.style.visibility = "hidden";
-      questionList[currentQuestion].isCorrect();
-    });
-  }
-
   // return {
     // play one question (accessible outside module)
-    const playGame =  function() {
+    function newQuestion() {
       currentQuestion = Math.floor(Math.random()*questionList.length);
       questionList[currentQuestion].display();
+      optionsContainer.classList.remove("hide");
+      outcome.classList.add("hide");
+      guesses = 1;
+      for (i = 0; i < optionsButtons.length; i++) {
+        optionsButtons[i].style.visibility = "visible";
+      };
     }
   // };
+
+  // event listener for option buttons
+  const optionsButtons = [].slice.call(document.querySelectorAll("button.option"));
+  const optionsContainer = document.querySelector(".optionsContainer");
+
+  for (i = 0; i < optionsButtons.length; i++) {
+    optionsButtons[i].addEventListener("click", function() {
+      givenAnswer = parseInt(this.id);
+      correct = givenAnswer === questionList[currentQuestion].correct;
+      outcome.classList.remove("hide");
+      if (correct) {
+        outcome.textcontent = "Correct!";
+        optionsContainer.classList.add("hide");
+        guesses === 1 ? score++ : score = score + 0.5;
+        setTimeout(newQuestion, 1000);
+      } else if (!correct && guesses === 1) {
+        this.style.visibility = "hidden";
+        outcome.textcontent = "Try again";
+        guesses++;
+        lives = lives - 0.5;
+      } else {
+        optionsContainer.classList.add("hide");
+        outcome.textcontent = "bad luck";
+        lives = lives - 0.5;
+        setTimeout(newQuestion, 100);
+      }
+      // update lives & score
+    });
+  }
 // })();
 
 // quizGame.playGame();
-playGame();
+newQuestion();
