@@ -64,10 +64,11 @@ button:hover, button:focus {
   background: #e7e7e7;
 }
 
-.score {
+.score, .lives {
+  display: inline-block;
   font-family: 'Pacifico';
   font-size: 1.5em;
-  margin: 10px 0;
+  margin: 5px;
 }
 
 #question-area {

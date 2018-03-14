@@ -25,6 +25,9 @@
   const optionsContainer = document.querySelector(".optionsContainer");
   const outcome = document.querySelector(".outcome");
   const scoreDisplay = document.querySelector(".score>span");
+  const livesDisplay = document.querySelector(".lives>span");
+  const gameOver = document.querySelector(".gameOver");
+  const resetButton = document.querySelector("button.reset");
 
   // function constructor to generate questions (private)
   const Question = function(category, level, question, answers, correct) {
@@ -70,6 +73,16 @@ function updateScore() {
   scoreDisplay.innerText = score;
 }
 
+// update lives and reset if out of lives
+function updateLives() {
+  lives = lives - 0.5;
+  livesDisplay.innerText = lives;
+  if (lives === 0) {
+    gameOver.classList.remove("hide");
+    resetButton.classList.remove("hide");
+  }
+}
+
 // check if given answer is correct
 function checkAnswer() {
   givenAnswer = parseInt(this.id);
@@ -85,11 +98,11 @@ function checkAnswer() {
     this.classList.add("invisible")
     outcome.innerText = "try again";
     guesses++;
-    lives = lives - 0.5;
+    updateLives()
   } else {
     optionsContainer.classList.add("hide");
     outcome.innerText = "bad luck";
-    lives = lives - 0.5;
+    updateLives()
     setTimeout(playQuestion, 1000);
   }
 };
