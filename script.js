@@ -20,6 +20,7 @@
   let guesses = 1;
   let score = 0;
   let lives = 3;
+  const questionText = document.querySelector(".question");
   const optionsButtons = [].slice.call(document.querySelectorAll("button.option"));
   const optionsContainer = document.querySelector(".optionsContainer");
   const outcome = document.querySelector(".outcome");
@@ -32,8 +33,12 @@
     this.answers = answers,
     this.correct = correct,
     this.display = function() {
-      console.log(this.question + this.answers);
-    }
+      questionText.innerText = this.question;
+      console.log(this.question);
+      for (let i = 0; i < optionsButtons.length; i++) {
+        optionsButtons[i].innerText = this.answers[i][1];
+      };
+    };
   }
 
   // create questions (private) - want to change this to use a functions to access a database instead of writing out by hand
