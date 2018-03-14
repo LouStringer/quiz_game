@@ -64,6 +64,12 @@ button:hover, button:focus {
   background: #e7e7e7;
 }
 
+.score {
+  font-family: 'Pacifico';
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
 #question-area {
   display: flex;
   flex-wrap: wrap;

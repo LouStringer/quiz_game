@@ -24,6 +24,7 @@
   const optionsButtons = [].slice.call(document.querySelectorAll("button.option"));
   const optionsContainer = document.querySelector(".optionsContainer");
   const outcome = document.querySelector(".outcome");
+  const scoreDisplay = document.querySelector(".score>span");
 
   // function constructor to generate questions (private)
   const Question = function(category, level, question, answers, correct) {
@@ -34,7 +35,6 @@
     this.correct = correct,
     this.display = function() {
       questionText.innerText = this.question;
-      console.log(this.question);
       for (let i = 0; i < optionsButtons.length; i++) {
         optionsButtons[i].innerText = this.answers[i][1];
       };
@@ -65,7 +65,12 @@
     }
   // };
 
-// event listener for option buttons
+// update score
+function updateScore() {
+  scoreDisplay.innerText = score;
+}
+
+// check if given answer is correct
 function checkAnswer() {
   givenAnswer = parseInt(this.id);
   correct = givenAnswer === questionList[currentQuestion].correct;
@@ -74,6 +79,7 @@ function checkAnswer() {
     optionsContainer.classList.add("hide");
     outcome.innerText = "correct!";
     guesses === 1 ? score++ : score = score + 0.5;
+    updateScore();
     setTimeout(playQuestion, 1000);
   } else if (!correct && guesses === 1) {
     this.classList.add("invisible")
@@ -86,9 +92,9 @@ function checkAnswer() {
     lives = lives - 0.5;
     setTimeout(playQuestion, 1000);
   }
-  // update lives & score
 };
 
+// event listener for option buttons
 for (i = 0; i < optionsButtons.length; i++) {
   optionsButtons[i].addEventListener("click", checkAnswer);
 }
