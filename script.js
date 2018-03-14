@@ -20,6 +20,7 @@
   let guesses = 1;
   let score = 0;
   let lives = 3;
+  const questionArea = document.querySelector(".question-area");
   const questionText = document.querySelector(".question");
   const optionsButtons = [].slice.call(document.querySelectorAll("button.option"));
   const optionsContainer = document.querySelector(".optionsContainer");
@@ -73,15 +74,31 @@ function updateScore() {
   scoreDisplay.innerText = score;
 }
 
-// update lives and reset if out of lives
+// update lives and game over if out of lives
 function updateLives() {
   lives = lives - 0.5;
   livesDisplay.innerText = lives;
   if (lives === 0) {
+    questionArea.classList.add("hide");
     gameOver.classList.remove("hide");
     resetButton.classList.remove("hide");
   }
 }
+
+// reset and start new game
+function reset() {
+  questionArea.classList.remove("hide");
+  gameOver.classList.add("hide");
+  resetButton.classList.add("hide");
+  givenAnswer = "";
+  correct = "";
+  score = 0;
+  scoreDisplay.innerText = score;
+  lives = 3;
+  livesDisplay.innerText = lives;
+  playQuestion();
+}
+resetButton.addEventListener("click", reset);
 
 // check if given answer is correct
 function checkAnswer() {
@@ -103,7 +120,9 @@ function checkAnswer() {
     optionsContainer.classList.add("hide");
     outcome.innerText = "bad luck";
     updateLives()
-    setTimeout(playQuestion, 1000);
+    if (lives > 0) {
+      setTimeout(playQuestion, 1000)
+    };
   }
 };
 
